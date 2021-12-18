@@ -3,26 +3,35 @@ name: Testing
 env:
   MODE: "dev"
 jobs:
-  debug:
+  debug-libapache2:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Prepare
-        run: ./docs/scripts/prepare-ci.sh
-      - name: Install Drupal
+      - name: Debug libapache2
         run: |
-          sudo systemctl start mysql.service
-          sleep 10
           sudo service apache2 start
           sleep 10
-          vendor/bin/robo ci:install-drupal
-      - name: Run Cypress tests
-        run: |
-          sudo systemctl start mysql.service
-          sleep 10
-          sudo service apache2 start
-          sleep 10
-          vendor/bin/robo job:tests-cypress
+          dpkg -l | grep libapache2
+#   debug:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Prepare
+#         run: ./docs/scripts/prepare-ci.sh
+#       - name: Install Drupal
+#         run: |
+#           sudo systemctl start mysql.service
+#           sleep 10
+#           sudo service apache2 start
+#           sleep 10
+#           vendor/bin/robo ci:install-drupal
+#       - name: Run Cypress tests
+#         run: |
+#           sudo systemctl start mysql.service
+#           sleep 10
+#           sudo service apache2 start
+#           sleep 10
+#           vendor/bin/robo job:tests-cypress
 
 #  code-standards:
 #    runs-on: ubuntu-20.04
