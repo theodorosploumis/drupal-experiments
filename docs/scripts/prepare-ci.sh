@@ -12,8 +12,7 @@ mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
 # Install PHP modules
 php -i
-sudo apt-get install -y libapache2-mod-php
-# libapache2-mod-php8.1
+sudo apt-get install -y libapache2-mod-php8.1
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
@@ -31,7 +30,7 @@ sudo chown -R www-data:www-data /var/www/html
 cp .github/config/info.php /var/www/html/info.php
 
 # Enable apache2
-systemctl enable apache2.service
+sudo systemctl enable apache2.service
 sudo ufw allow in "Apache"
 
 # Debug
