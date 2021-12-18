@@ -302,7 +302,8 @@ class RoboFile extends Tasks {
     }
 
     // Installation from existing config files
-    $this->taskExec($drush . 'si --existing-config -y')->run();
+    $this->taskExec($drush . 'si demo_umami -y')->run();
+    $this->taskExec($drush . 'en redirect404_home devel stage_file_proxy environment_indicator admin_toolbar -y')->run();
 
     // Enable/disable modules according to MODE
     $this->siteSetMode($mode, $site);
