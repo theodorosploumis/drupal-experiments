@@ -1,4 +1,4 @@
-uuid: fca1f6f7-e3d2-404f-a065-a9c260dc85cb
+uuid: bd05af33-7c95-48d5-b117-5a14f0b833aa
 langcode: en
 status: true
 dependencies:
@@ -19,11 +19,6 @@ settings:
           items:
             - Bold
             - Italic
-            - JustifyRight
-            - JustifyCenter
-            - JustifyLeft
-            - JustifyBlock
-            - RemoveFormat
         -
           name: Linking
           items:
@@ -47,8 +42,6 @@ settings:
           name: Tools
           items:
             - Source
-            - ShowBlocks
-            - Maximize
   plugins:
     language:
       language_list: un

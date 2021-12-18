@@ -20,22 +20,6 @@ class RoboFile extends Tasks {
   public string $mode = "dev";
   public string $code_testing_dir = "web/modules/custom";
 
-  private array $var_dev_modules = [
-    "devel",
-    "stage_file_proxy",
-    "field_ui",
-    "views_ui",
-      //  "shield",
-      //  "reroute_email",
-    "webprofiler", // keep always last
-  ];
-
-  private array $var_prd_modules = [
-    "dynamic_page_cache",
-    "big_pipe",
-    "backup_migrate",
-  ];
-
   public function __construct() {
     if (isset($_ENV['MODE'])) {
       $this->mode = strtolower($_ENV['MODE']);
@@ -161,16 +145,6 @@ class RoboFile extends Tasks {
     return NULL;
   }
 
-  public function modulesEnable(array $modules) {
-    $list = $this->arrayImplode($modules);
-    $this->modulesAction($list, "enable");
-  }
-
-  public function modulesDisable(array $modules) {
-    $list = $this->arrayImplode($modules);
-    $this->modulesAction($list, "disable");
-  }
-
   /**
    * List, Enable or Disable modules.
    * See modules we exclude from config on "settings.php: $settings['config_exclude_modules']".
@@ -229,11 +203,7 @@ class RoboFile extends Tasks {
     $this->validateMode($mode);
 
     if ($mode === "prd") {
-      $this->modulesEnable($this->var_prd_modules);
-      $this->modulesDisable($this->var_dev_modules);
     } else {
-      $this->modulesEnable($this->var_dev_modules);
-      $this->modulesDisable($this->var_prd_modules);
       $this->configDisableCaches($site);
     }
   }

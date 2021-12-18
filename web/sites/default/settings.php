@@ -778,34 +778,25 @@ $settings['file_private_path'] = $app_root . '/../private-files';
 // Hash salt
 $settings['hash_salt'] = "DEMOyqfahUr3JC4KqPMtuuJ7GHSW1y614iZAymj9WbKdA7keP1CxLzexfb7iSNYZ02E04BWdCDVJw";
 
-// Exclude modules from config cim/cex
-$settings['config_exclude_modules'] = [
-  'backup_migrate',
-  'devel',
-  'devel_generate',
-  'kint',
-  'webprofiler',
-  'stage_file_proxy',
-  'masquerade',
-  'dynamic_page_cache',
-  'page_cache',
-  'big_pipe',
-  'shield',
-  'field_ui',
-  'views_ui',
-];
+// Mailsystem
+$config['system.mail']['interface']['default']       = 'devel_mail_log';
+$config['mailsystem.settings']['defaults']['sender'] = 'devel_mail_log';
+$config['devel.settings']['debug_mail_directory']    = 'private://emails';
 
-// Database setup from .env file
-$databases['default']['default'] = [
-  'database' => $_SERVER['MYSQL_DATABASE'],
-  'host' => $_SERVER['MYSQL_HOST'],
-  'username' => $_SERVER['MYSQL_USERNAME'],
-  'password' => $_SERVER['MYSQL_PASSWORD'],
-  'port' => $_SERVER['MYSQL_PORT'],
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-  'prefix' => '',
-];
+$config['system.logging']['error_level'] = 'verbose';
+
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
+// Permissions
+$settings['rebuild_access'] = TRUE;
+$settings['skip_permissions_hardening'] = TRUE;
+$settings['trusted_host_patterns'] = ['.*'];
+
+// Entity backaups on database
+$settings['entity_update_backup'] = FALSE;
 
 
 // Automatically generated include for settings managed by ddev.
