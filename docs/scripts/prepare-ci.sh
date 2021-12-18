@@ -37,7 +37,10 @@ sudo ufw allow in "Apache"
 # php -i
 ls /var/www/html
 sudo cat /etc/hosts
+
 curl -v localhost
+curl -v 192.168.2.1
+curl -v 127.0.0.1
 
 if ping -c 1 localhost &> /dev/null
 then
