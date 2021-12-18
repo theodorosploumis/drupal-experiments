@@ -30,23 +30,24 @@ sudo service apache2 start
 sudo ufw allow in "Apache"
 
 # Debug
+
 # sudo echo /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
 # sudo cat /etc/apache2/mods-available/dir.conf
 # sudo a2ensite 000-default.conf
 # php -i
+
 echo -e "a2query -m"
 a2query -m
+
+echo -e "dpkg -l | grep php"
+dpkg -l | grep php
+
 echo -e "/etc/hosts"
 sudo cat /etc/hosts
 
-
 echo -e "curl -v localhost"
 curl -v localhost
-echo -e "curl -v 192.168.2.1"
-curl -v 192.168.2.1
-echo -e "curl -v 127.0.0.1"
-curl -v 127.0.0.1
 
 if ping -c 1 localhost &> /dev/null
 then
