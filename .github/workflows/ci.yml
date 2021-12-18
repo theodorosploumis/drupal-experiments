@@ -17,7 +17,12 @@ jobs:
           sleep 10
           vendor/bin/robo ci:install-drupal
       - name: Run Cypress tests
-        run: vendor/bin/robo job:tests-cypress
+        run: |
+          sudo systemctl start mysql.service
+          sleep 10
+          sudo service apache2 start
+          sleep 10
+          vendor/bin/robo job:tests-cypress
 
 #  code-standards:
 #    runs-on: ubuntu-20.04

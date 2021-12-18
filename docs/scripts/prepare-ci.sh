@@ -10,10 +10,6 @@ COMPOSER=composer.json && composer install -q --prefer-dist --no-progress --ansi
 sudo systemctl start mysql.service
 mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
-# Install PHP modules
-php -i
-sudo apt-get install -y libapache2-mod-php8.1
-
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
 cp .github/config/ci.env .env
@@ -31,13 +27,13 @@ cp .github/config/info.php /var/www/html/info.php
 
 # Enable apache2
 sudo service apache2 start
-sudo ufw allow in "Apache"
 
 # Debug
 # sudo echo /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
 # sudo cat /etc/apache2/mods-available/dir.conf
 # sudo a2ensite 000-default.conf
+# php -i
 ls /var/www/html
 curl localhost
 
