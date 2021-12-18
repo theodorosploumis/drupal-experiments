@@ -27,6 +27,7 @@ cp .github/config/info.php /var/www/html/info.php
 
 # Enable apache2
 sudo service apache2 start
+sudo ufw allow in "Apache"
 
 # Debug
 # sudo echo /etc/apache2/apache2.conf
@@ -35,7 +36,8 @@ sudo service apache2 start
 # sudo a2ensite 000-default.conf
 # php -i
 ls /var/www/html
-curl localhost
+sudo cat /etc/hosts
+curl -v localhost
 
 if ping -c 1 localhost &> /dev/null
 then
