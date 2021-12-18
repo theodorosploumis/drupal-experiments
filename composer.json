@@ -90,7 +90,8 @@
         },
         "patches": {
             "drupal/core": {
-                "BaseFieldOverride fails to take into account ContentEntityInterface::bundleFieldDefinitions()... https://dgo.to/2321071": "https://www.drupal.org/files/issues/2019-12-24/2321071-39.patch"
+                "BaseFieldOverride fails to take into account ContentEntityInterface::bundleFieldDefinitions()... https://dgo.to/2321071": "https://www.drupal.org/files/issues/2019-12-24/2321071-39.patch",
+                "Allow an install hook in profiles installing from configuration, https://dgo.to/2982052": "https://www.drupal.org/files/issues/2021-09-27/2982052-73.patch"
             },
             "drupal/devel": {
                 "Compatability with Core 9.3, https://gitlab.com/drupalspoons/devel/-/issues/388": "https://gitlab.com/drupalspoons/devel/uploads/63e4e96921f8c05d3e98faf84d62d4e4/388-compatability-with-core-9.3.diff"
