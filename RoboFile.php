@@ -334,9 +334,6 @@ class RoboFile extends Tasks {
     // Installation from existing config files
     $this->taskExec($drush . 'si --existing-config -y')->run();
 
-    // Run Migrations
-    $this->migrationsRun($site);
-
     // Enable/disable modules according to MODE
     $this->siteSetMode($mode, $site);
 

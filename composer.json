@@ -34,6 +34,7 @@
         "drupal/pathauto": "^1.8",
         "drupal/pathologic": "^1.0@alpha",
         "drupal/redirect": "^1.6",
+        "drupal/redirect404_home": "^1.0",
         "drupal/replicate_ui": "^1.0",
         "drupal/smtp": "^1.0",
         "drupal/stage_file_proxy": "^1.1",
