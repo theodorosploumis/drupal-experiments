@@ -516,13 +516,13 @@ class RoboFile extends Tasks {
 
     // Install demo_umami
     $this->taskExec($drush . $alias . $install_root . $install_uri .
-      $install_user . $install_db . $install_profile . ' site:install -v -y')->run();
+      $install_user . $install_db . ' site:install  ' . $install_profile . '-v -y')->run();
 
     // Enable modules
     $this->taskExec($drush . 'en redirect404_home devel stage_file_proxy environment_indicator admin_toolbar -y')->run();
 
-    // Set site mode
-    $this->siteSetMode("dev");
+    // Disable caches
+    $this->configDisableCaches();
   }
 
   /**

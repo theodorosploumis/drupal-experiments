@@ -11,15 +11,8 @@ sudo systemctl start mysql.service
 mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
 # Install PHP modules
-sudo apt-get -y install libapache2-mod-php8.1
-sudo a2enmod rewrite
-sudo systemctl restart apache2
-
-# Debug
-# sudo echo /etc/apache2/apache2.conf
-# sudo cat /etc/apache2/sites-available/000-default.conf
-# sudo cat /etc/apache2/mods-available/dir.conf
-# sudo a2ensite 000-default.conf
+php --version
+# sudo apt-get -y install libapache2-mod-php8.1
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
@@ -36,9 +29,12 @@ sudo chown -R www-data:www-data /var/www/html
 
 cp .github/config/info.php /var/www/html/info.php
 
+# Debug
+# sudo echo /etc/apache2/apache2.conf
+# sudo cat /etc/apache2/sites-available/000-default.conf
+# sudo cat /etc/apache2/mods-available/dir.conf
+# sudo a2ensite 000-default.conf
 ls /var/www/html
-
-sudo systemctl restart apache2
 curl localhost
 
 if ping -c 1 localhost &> /dev/null
