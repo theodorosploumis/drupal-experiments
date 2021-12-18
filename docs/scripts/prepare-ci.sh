@@ -11,8 +11,8 @@ sudo systemctl start mysql.service
 mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
 # Install PHP modules
-php --version
-# sudo apt-get -y install libapache2-mod-php8.1
+php -i
+sudo apt -y install libapache2-mod-php8.1
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
@@ -29,6 +29,10 @@ sudo chown -R www-data:www-data /var/www/html
 
 cp .github/config/info.php /var/www/html/info.php
 
+# Enable apache2
+systemctl enable apache2.service
+sudo ufw allow in "Apache"
+
 # Debug
 # sudo echo /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
@@ -41,7 +45,6 @@ if ping -c 1 localhost &> /dev/null
 then
   echo "Host localhost not found."
   echo "Apache2 service is not active."
-  sudo ufw allow in "Apache"
 else
   echo "Host localhost exists. Apache2 is active."
 fi
