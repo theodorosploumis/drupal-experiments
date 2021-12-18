@@ -292,7 +292,6 @@ class RoboFile extends Tasks {
     $this->taskExec("rm -rf web/modules/contrib")->run();
     $this->taskExec("rm -rf web/themes/contrib")->run();
     $this->taskExec("rm -rf web/profiles/contrib")->run();
-    $this->taskExec("cp -f web/sites/default/default.services.yml ".$path."/services.yml")->run();
 
     // Composer install
     if ($mode === "prd") {
@@ -500,8 +499,7 @@ class RoboFile extends Tasks {
    * @return void
    */
   public function CiInstallDrupal():void {
-    $root = getenv('GITHUB_WORKSPACE');
-    $web_root = $root . "/web";
+    $web_root = "/var/www/html/web";
 
     // Install Drupal
     $drush = $this->drush();
@@ -511,13 +509,17 @@ class RoboFile extends Tasks {
     $install_user = " --account-pass=admin ";
     $install_uri = " --uri=http://localhost ";
     $install_root = " --root=" . $web_root . " ";
-    $install_profile = " --existing-config ";
+    $install_profile = " demo_umami ";
 
     // Initial debugging
     $this->taskExec($drush . $alias . $install_root . $install_uri . ' status -vvv')->run();
 
+    // Install demo_umami
     $this->taskExec($drush . $alias . $install_root . $install_uri .
-      $install_user . $install_db . $install_profile . ' site:install -vvv -y')->run();
+      $install_user . $install_db . $install_profile . ' site:install -v -y')->run();
+
+    // Enable modules
+    $this->taskExec($drush . 'en redirect404_home devel stage_file_proxy environment_indicator admin_toolbar -y')->run();
 
     // Set site mode
     $this->siteSetMode("dev");
