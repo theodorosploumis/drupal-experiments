@@ -37,7 +37,7 @@
         "drupal/redirect404_home": "^1.0",
         "drupal/replicate_ui": "^1.0",
         "drupal/smtp": "^1.0",
-        "drupal/stage_file_proxy": "^1.1",
+        "drupal/stage_file_proxy": "^1.2",
         "drush/drush": "^10.6",
         "oomphinc/composer-installers-extender": "^2.0",
         "vlucas/phpdotenv": "^5.3"

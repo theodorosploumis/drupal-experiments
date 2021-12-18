@@ -173,7 +173,7 @@ class RoboFile extends Tasks {
 
   /**
    * List, Enable or Disable modules.
-   * See modules we exclude from config on "/docs/settings/global.settings.php: $settings['config_exclude_modules']".
+   * See modules we exclude from config on "settings.php: $settings['config_exclude_modules']".
    *
    * $modules = "field_ui views_ui devel stage_file_proxy";
    *
