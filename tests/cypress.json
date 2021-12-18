@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://127.0.0.1",
+  "baseUrl": "http://localhost",
   "integrationFolder": "tests/cypress",
   "env": {
     "MODE": "dev"

@@ -35,11 +35,17 @@ sudo ufw allow in "Apache"
 # sudo cat /etc/apache2/mods-available/dir.conf
 # sudo a2ensite 000-default.conf
 # php -i
-ls /var/www/html
+echo -e "a2query -m"
+a2query -m
+echo -e "/etc/hosts"
 sudo cat /etc/hosts
 
+
+echo -e "curl -v localhost"
 curl -v localhost
+echo -e "curl -v 192.168.2.1"
 curl -v 192.168.2.1
+echo -e "curl -v 127.0.0.1"
 curl -v 127.0.0.1
 
 if ping -c 1 localhost &> /dev/null
