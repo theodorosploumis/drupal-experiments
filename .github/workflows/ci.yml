@@ -11,9 +11,9 @@ jobs:
         run: ./docs/scripts/prepare-ci.sh
       - name: Install Drupal
         run: |
-          sudo systemctl enable mysql.service
+          sudo systemctl start mysql.service
           sleep 10
-          sudo systemctl enable apache2.service
+          sudo service apache2 start
           sleep 10
           vendor/bin/robo ci:install-drupal
       - name: Run Cypress tests

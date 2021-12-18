@@ -30,7 +30,7 @@ sudo chown -R www-data:www-data /var/www/html
 cp .github/config/info.php /var/www/html/info.php
 
 # Enable apache2
-sudo systemctl enable apache2.service
+sudo service apache2 start
 sudo ufw allow in "Apache"
 
 # Debug
