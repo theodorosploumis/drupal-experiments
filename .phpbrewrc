@@ -1,0 +1,2 @@
+# phpbrew install 8.0.13 as php-8 +default +gd
+phpbrew use php-8

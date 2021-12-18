@@ -1,0 +1,14 @@
+# Source: https://github.com/drud/ddev-contrib/tree/master/docker-compose-services/drupal8-behat-seleniumss
+version: '3.6'
+services:
+  web:
+    depends_on:
+    - db
+    - selenium
+  selenium:
+    container_name: ddev-${DDEV_SITENAME}-selenium
+    image: selenium/standalone-chrome-debug:3.141
+    networks:
+      default:
+        aliases:
+        - web

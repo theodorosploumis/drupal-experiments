@@ -1,0 +1,124 @@
+#!/usr/bin/php
+<?php
+
+/**
+ * @file
+ * Checks for debugging code in modified files.
+ */
+
+// Initial values for some variables.
+$dir = __DIR__;
+$project_root = str_replace("/docs/scripts", "", $dir);
+$exit_status = 0;
+
+$file_folders = [
+  $project_root,
+//  $project_root . "/web/modules/custom",
+//  $project_root . "/web/themes/custom",
+//  $project_root . "/web/profiles/custom",
+];
+
+// Ignore file paths that contain these strings.
+$ignore_file_path_strings = [
+  'contrib',
+  'core',
+  'vendor',
+  'config/sync',
+  'private-files',
+  'sites/default/files',
+  '.ddev',
+  '.vscode',
+];
+
+// File extensions to check for.
+$file_extensions = [
+  'php',
+  'module',
+  'inc',
+  'install',
+  'test',
+  'profile',
+  'theme',
+  'txt',
+  'class',
+];
+
+// Ignore filenames that contain these strings.
+$ignore_filename_strings = [
+  '_default.inc',
+  'context.inc',
+  'ds.inc',
+  'features',
+  'field_group.inc',
+  'rules_defaults',
+  'strongarm.inc',
+  'RoboFile.php',
+];
+
+// Debugging code segments to make sure they were not committed.
+// ToDo: Be sure that SCSS does not uses these functions
+$debugging_searches = [
+  'breakpoint(',
+  'dargs(',
+  'dd(',
+  'ddebug_backtrace(',
+  'devel_breakpoint(',
+  'devel_dump(',
+  'dpm(',
+  'dvm(',
+  'dsm(',
+  'dpr(',
+  'dvr(',
+  'dump(',
+  'kpr(',
+  'ksm(',
+  'kint(',
+  'print_r(',
+  'vardumper(',
+  'var_dump(',
+  'var_export(',
+  'console\.log',
+];
+
+// Loop through each file that has been modified in this commit.
+foreach ($file_folders as $folder) {
+  if (!file_exists($folder)) {
+    continue;
+  }
+  $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folder));
+
+  foreach ($files as $file) {
+    // Skip files that don't exist.
+    if (!file_exists($file)) {
+      continue;
+    }
+
+    // Get the filename and extension.
+    $filename = pathinfo($file, PATHINFO_BASENAME);
+    $ext = pathinfo($file, PATHINFO_EXTENSION);
+
+    // Skip over the file if it matches an ignored filename or an ignored file
+    // path, or does not match one of the included file extensions.
+    $ignore_filenames = array_filter($ignore_filename_strings, static function ($item) use ($filename) {
+      return str_contains($filename, $item);
+    });
+    $ignore_file_paths = array_filter($ignore_file_path_strings, static function ($item) use ($file) {
+      return str_contains($file, $item);
+    });
+    if ( !empty($ignore_filenames) ||  !empty($ignore_file_paths) || !in_array($ext, $file_extensions, TRUE)) {
+      continue;
+    }
+
+    // Check for debugging code that was committed.
+    foreach ($debugging_searches as $search) {
+      $debugging_output = [];
+      exec("git diff --cached --unified=0 " . escapeshellarg($file) . " | grep '\+.*" . $search . "'", $debugging_output);
+      if (!empty($debugging_output)) {
+        echo "Commit aborted. Debugging code found on file ".$file.":\n" . implode("\n", $debugging_output), "\n";
+        $exit_status = 1;
+      }
+    }
+  }
+}
+
+exit($exit_status);

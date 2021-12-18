@@ -1,0 +1,94 @@
+{
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Regex",
+        "options": {
+          "regex": "[([A-Z]+-[0-9]+): .*]",
+          "error": "Commit message should contain Task/Issue number => 'PROJ-888: My commit message'"
+        },
+        "conditions": []
+      },
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+        "options": {
+          "subjectLength": 72,
+          "bodyLineLength": 72
+        },
+        "conditions": []
+      }
+    ]
+  },
+  "pre-commit": {
+    "enabled": false,
+    "actions": [
+      {
+        "action": "echo 'Cannot push to master branch directly. Please use another branch.'; exit 1",
+        "options": {
+        },
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\OnBranch",
+            "args": [
+              "master"
+            ]
+          }
+        ]
+      },
+      {
+        "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "vendor/bin/phpunit web/modules/custom",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "vendor/bin/robo phpcs",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "php docs/scripts/phpcs-debug",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "composer phpstan:analyse",
+        "options": [],
+        "conditions": []
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": false,
+    "actions": []
+  },
+  "prepare-commit-msg": {
+    "enabled": true,
+    "actions": []
+  },
+  "post-commit": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-merge": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-checkout": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-rewrite": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-change": {
+    "enabled": false,
+    "actions": []
+  }
+}

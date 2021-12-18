@@ -1,0 +1,139 @@
+{
+    "name": "theodorosploumis/drupal-actions",
+    "description": "Drupal 9.x for GutHub Actions",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "require": {
+        "php": "8.0",
+        "composer-plugin-api": "^2",
+        "composer/installers": "^1.12",
+        "consolidation/robo": "^3.0",
+        "cweagans/composer-patches": "^1.7",
+        "defuse/php-encryption": "^2.3",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/backup_migrate": "^5.0",
+        "drupal/core-composer-scaffold": "^9.2",
+        "drupal/core-recommended": "^9.3",
+        "drupal/devel": "^4.1",
+        "drupal/environment_indicator": "^4.0",
+        "drupal/mailsystem": "^4.3",
+        "drupal/masquerade": "^2.0@beta",
+        "drupal/migrate_plus": "^5.1",
+        "drupal/migrate_source_csv": "^3.4",
+        "drupal/migrate_tools": "^5.0",
+        "drupal/pathauto": "^1.8",
+        "drupal/pathologic": "^1.0@alpha",
+        "drupal/redirect": "^1.6",
+        "drupal/replicate_ui": "^1.0",
+        "drupal/smtp": "^1.0",
+        "drupal/stage_file_proxy": "^1.1",
+        "drush/drush": "^10.6",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "require-dev": {
+        "behat/behat": "^3.10",
+        "captainhook/captainhook": "^5.10",
+        "captainhook/plugin-composer": "^5.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "drupal/coder": "^8.3",
+        "drupal/core-dev": "^9.3",
+        "drupal/drupal-extension": "^4.1",
+        "kint-php/kint": "^3.3",
+        "marcocesarato/php-conventional-changelog": "^1.12",
+        "mglaman/phpstan-drupal": "^0.12",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpspec/prophecy-phpunit": "^2",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9",
+        "roave/security-advisories": "dev-latest",
+        "symfony/phpunit-bridge": "^5.4",
+        "weitzman/drupal-test-traits": "^1.5"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "bin-dir": "vendor/bin/",
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.0"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpstan:analyse": "vendor/bin/phpstan analyse --level 5 web/modules/custom",
+        "changelog": "conventional-changelog",
+        "release": "conventional-changelog --commit",
+        "release:patch": "conventional-changelog --patch --commit",
+        "release:minor": "conventional-changelog --minor --commit",
+        "release:major": "conventional-changelog --major --commit"
+    },
+    "extra": {
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/core": {
+                "BaseFieldOverride fails to take into account ContentEntityInterface::bundleFieldDefinitions()... https://dgo.to/2321071": "https://www.drupal.org/files/issues/2019-12-24/2321071-39.patch"
+            },
+            "drupal/devel": {
+                "Compatability with Core 9.3, https://gitlab.com/drupalspoons/devel/-/issues/388": "https://gitlab.com/drupalspoons/devel/uploads/63e4e96921f8c05d3e98faf84d62d4e4/388-compatability-with-core-9.3.diff"
+            }
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "overwrite": true,
+            "file-mapping": {
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ]
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ]
+    }
+}

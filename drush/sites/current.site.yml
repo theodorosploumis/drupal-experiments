@@ -1,0 +1,11 @@
+# Edit or remove this file as needed.
+# Docs at https://github.com/drush-ops/drush/blob/master/examples/example.site.yml
+ci:
+  env-vars:
+    MODE: dev
+  files: sites/default/files
+  paths:
+    dump-dir: /tmp
+    drush-script: /home/runner/work/drupal-actions/drupal-actions/vendor/bin/drush
+  root: /home/runner/work/drupal-actions/drupal-actions/web
+  uri: http://localhost

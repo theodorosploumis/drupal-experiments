@@ -1,0 +1,80 @@
+# Docker image
+image: tplcom/gitpod-drupal-workspace:latest
+
+# ddev and composer are running as part of prebuild task.
+# When starting a workspace all docker images are ready.
+tasks:
+  - name: ssh-generate
+    before:
+      mkdir -p ~/.ssh &&
+      printenv SSH_PUBLIC_KEY > ~/.ssh/id_rsa.pub &&
+      chmod 644 ~/.ssh/id_rsa.pub &&
+      printenv SSH_PRIVATE_KEY > ~/.ssh/id_rsa &&
+      chmod 600 ~/.ssh/id_rsa
+  - name: ddev
+    before:
+      source ~/.phpbrew/bashrc && phpbrew use php-8 && bash .ddev/gitpod-setup-ddev.sh
+    init:
+      export DDEV_NONINTERACTIVE=true
+      ddev composer install
+    command:
+      gp await-port 8080 && gp preview $(gp url 8080)
+
+# VScode xdebug extension
+vscode:
+  extensions:
+    - felixfbecker.php-debug
+    - bmewburn.vscode-intelephense-client
+    - ziyasal.vscode-open-in-github
+
+ports:
+  - port: 8080
+    onOpen: ignore
+    visibility: public
+  # Currently un-notified and unsupported mailhog http port
+  - port: 8025
+    onOpen: ignore
+    visibility: private
+  # Currently un-notified and unsupported mailhog https port
+  - port: 8026
+    onOpen: ignore
+    visibility: private
+  # Currently un-notified and unsupported phpmyadmin http port
+  - port: 8036
+    onOpen: ignore
+    visibility: private
+  # Currently un-notified and unsupported phpmyadmin https port
+  - port: 8037
+    onOpen: ignore
+    visibility: private
+  # router http port that we're ignoring.
+  - port: 8888
+    onOpen: ignore
+    visibility: private
+  # router https port that we're ignoring.
+  - port: 8889
+    onOpen: ignore
+    visibility: private
+  # xdebug port
+  - port: 9000
+    onOpen: ignore
+    visibility: private
+
+github:
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: false
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: false
+    # enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: false
+    # add a check to pull requests (defaults to true)
+    addCheck: false
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: false
+    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
+    addBadge: true
+    # add a label once the prebuild is ready to pull requests (defaults to false)
+    addLabel: true
