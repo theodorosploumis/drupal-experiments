@@ -12,7 +12,8 @@ mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
 # Install PHP modules
 php -i
-sudo apt-fast install -y --no-install-recommends libapache2-mod-php
+sudo apt-get install -y libapache2-mod-php
+# libapache2-mod-php8.1
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
