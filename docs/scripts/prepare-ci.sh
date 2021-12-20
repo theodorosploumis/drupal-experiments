@@ -10,6 +10,14 @@ COMPOSER=composer.json && composer install -q --prefer-dist --no-progress --ansi
 sudo systemctl start mysql.service
 mysql -e "CREATE DATABASE drupal;" -uroot -proot
 
+# Install PHP modules
+sudo apt-add-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get -y install libapache2-mod-php
+
+sudo a2enmod rewrite
+sudo service apache2 start
+
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
 cp .github/config/ci.env .env
