@@ -13,7 +13,17 @@ mysql -e "CREATE DATABASE drupal;" -uroot -proot
 # Install PHP modules
 sudo apt-add-repository ppa:ondrej/php -y
 sudo apt-get update
-sudo apt-get -y install libapache2-mod-php
+sudo apt-get -y install libapache2-mod-php8.1
+
+# Debug
+# sudo cat /etc/apache2/apache2.conf
+# sudo cat /etc/apache2/sites-available/000-default.conf
+# sudo cat /etc/apache2/mods-available/dir.conf
+# sudo a2ensite 000-default.conf
+
+# sudo apt-get install php libapache2-mod-php php-cli php-common \
+#      php-gd php-json php-mbstring php-xdebug php-mysql php-opcache php-curl \
+#      php-readline php-xml php-memcached php-oauth php-bcmath
 
 sudo a2enmod rewrite
 sudo service apache2 start
