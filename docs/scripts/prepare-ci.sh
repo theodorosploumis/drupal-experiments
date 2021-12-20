@@ -15,6 +15,8 @@ sudo apt-add-repository ppa:ondrej/php -y
 sudo apt-get update
 sudo apt-get -y install libapache2-mod-php8.1
 
+sudo service apache2 start
+
 # Debug
 # sudo cat /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
@@ -24,9 +26,6 @@ sudo apt-get -y install libapache2-mod-php8.1
 # sudo apt-get install php libapache2-mod-php php-cli php-common \
 #      php-gd php-json php-mbstring php-xdebug php-mysql php-opcache php-curl \
 #      php-readline php-xml php-memcached php-oauth php-bcmath
-
-sudo a2enmod rewrite
-sudo service apache2 start
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
@@ -44,8 +43,8 @@ sudo chown -R www-data:www-data /var/www/html
 cp .github/config/info.php /var/www/html/info.php
 
 # Enable apache2
-sudo service apache2 start
-sudo ufw allow in "Apache"
+# sudo service apache2 start
+# sudo ufw allow in "Apache"
 
 # Debug
 
@@ -55,14 +54,14 @@ sudo ufw allow in "Apache"
 # sudo a2ensite 000-default.conf
 # php -i
 
-echo -e "a2query -m"
-a2query -m
+# echo -e "a2query -m"
+# a2query -m
 
-echo -e "dpkg -l | grep php"
-dpkg -l | grep php
+# echo -e "dpkg -l | grep php"
+# dpkg -l | grep php
 
-echo -e "/etc/hosts"
-sudo cat /etc/hosts
+# echo -e "/etc/hosts"
+# sudo cat /etc/hosts
 
 echo -e "curl -v localhost"
 curl -v localhost
