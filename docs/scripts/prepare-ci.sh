@@ -15,6 +15,13 @@ sudo apt-add-repository ppa:ondrej/php -y
 sudo apt-get update
 sudo apt-get -y install libapache2-mod-php8.1
 
+# Firewall updates
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 22
+sudo ufw allow in "Apache"
+sudo ufw enable
+
 # Debug
 # sudo cat /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
@@ -49,7 +56,6 @@ if ping -c 1 localhost &> /dev/null
 then
   echo "Host localhost not found."
   echo "Apache2 service is not active."
-  sudo ufw allow in "Apache"
 else
   echo "Host localhost exists. Apache2 is active."
 fi
