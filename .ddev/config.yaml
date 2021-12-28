@@ -14,7 +14,7 @@ hooks:
   post-start:
   - exec: cp .env.example .env
   - exec: composer install
-webimage_extra_packages: []
+webimage_extra_packages: ['ruby']
 use_dns_when_possible: true
 timezone: Europe/Athens
 composer_version: "2"
