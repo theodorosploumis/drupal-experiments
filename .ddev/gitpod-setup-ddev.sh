@@ -43,3 +43,5 @@ COMPOSEEND
 ddev config global --router-bind-all-interfaces
 
 yes | ddev start
+
+ddev robo site:install
