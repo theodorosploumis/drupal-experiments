@@ -10,7 +10,7 @@ services:
     tty: true
     ipc: host
     links:
-      - web:cypress
+      - web:web
 
     environment:
       - CYPRESS_baseUrl=$DDEV_PRIMARY_URL
