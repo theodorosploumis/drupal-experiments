@@ -33,7 +33,7 @@ sudo ufw enable
 #      php-readline php-xml php-memcached php-oauth php-bcmath
 
 sudo a2enmod rewrite
-sudo service apache2 start
+sudo ufw allow in "Apache"
 
 # Copy files
 cp .github/config/settings.local.php web/sites/default/settings.local.php
@@ -47,10 +47,20 @@ chmod 777 "${WEB}"/sites/default/settings.php
 sudo rm -rf  /var/www/html
 sudo ln -sf "${WEB}" /var/www/html
 sudo chown -R www-data:www-data /var/www/html
-ls /var/www/html
+
+cp .github/config/info.php /var/www/html/info.php
+
+# Debug
+# echo -e "/etc/hosts"
+# sudo cat /etc/hosts
+
+echo -e "a2query -m"
+a2query -m
 
 sudo service apache2 start
-curl localhost
+
+echo -e "curl -v localhost"
+curl -v localhost
 
 if ping -c 1 localhost &> /dev/null
 then

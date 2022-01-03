@@ -20,22 +20,6 @@ class RoboFile extends Tasks {
   public string $mode = "dev";
   public string $code_testing_dir = "web/modules/custom";
 
-  private array $var_dev_modules = [
-    "devel",
-    "stage_file_proxy",
-    "field_ui",
-    "views_ui",
-      //  "shield",
-      //  "reroute_email",
-    "webprofiler", // keep always last
-  ];
-
-  private array $var_prd_modules = [
-    "dynamic_page_cache",
-    "big_pipe",
-    "backup_migrate",
-  ];
-
   public function __construct() {
     if (isset($_ENV['MODE'])) {
       $this->mode = strtolower($_ENV['MODE']);
@@ -161,19 +145,9 @@ class RoboFile extends Tasks {
     return NULL;
   }
 
-  public function modulesEnable(array $modules) {
-    $list = $this->arrayImplode($modules);
-    $this->modulesAction($list, "enable");
-  }
-
-  public function modulesDisable(array $modules) {
-    $list = $this->arrayImplode($modules);
-    $this->modulesAction($list, "disable");
-  }
-
   /**
    * List, Enable or Disable modules.
-   * See modules we exclude from config on "/docs/settings/global.settings.php: $settings['config_exclude_modules']".
+   * See modules we exclude from config on "settings.php: $settings['config_exclude_modules']".
    *
    * $modules = "field_ui views_ui devel stage_file_proxy";
    *
@@ -229,11 +203,7 @@ class RoboFile extends Tasks {
     $this->validateMode($mode);
 
     if ($mode === "prd") {
-      $this->modulesEnable($this->var_prd_modules);
-      $this->modulesDisable($this->var_dev_modules);
     } else {
-      $this->modulesEnable($this->var_dev_modules);
-      $this->modulesDisable($this->var_prd_modules);
       $this->configDisableCaches($site);
     }
   }
@@ -322,7 +292,6 @@ class RoboFile extends Tasks {
     $this->taskExec("rm -rf web/modules/contrib")->run();
     $this->taskExec("rm -rf web/themes/contrib")->run();
     $this->taskExec("rm -rf web/profiles/contrib")->run();
-    $this->taskExec("cp -f web/sites/default/default.services.yml ".$path."/services.yml")->run();
 
     // Composer install
     if ($mode === "prd") {
@@ -332,10 +301,8 @@ class RoboFile extends Tasks {
     }
 
     // Installation from existing config files
-    $this->taskExec($drush . 'si --existing-config -y')->run();
-
-    // Run Migrations
-    $this->migrationsRun($site);
+    $this->taskExec($drush . 'si demo_umami -y')->run();
+    $this->taskExec($drush . 'en redirect404_home devel stage_file_proxy environment_indicator admin_toolbar -y')->run();
 
     // Enable/disable modules according to MODE
     $this->siteSetMode($mode, $site);
@@ -532,8 +499,7 @@ class RoboFile extends Tasks {
    * @return void
    */
   public function CiInstallDrupal():void {
-    $root = getenv('GITHUB_WORKSPACE');
-    $web_root = $root . "/web";
+    $web_root = "/var/www/html/web";
 
     // Install Drupal
     $drush = $this->drush();
@@ -543,16 +509,20 @@ class RoboFile extends Tasks {
     $install_user = " --account-pass=admin ";
     $install_uri = " --uri=http://localhost ";
     $install_root = " --root=" . $web_root . " ";
-    $install_profile = " --existing-config ";
+    $install_profile = " demo_umami ";
 
     // Initial debugging
     $this->taskExec($drush . $alias . $install_root . $install_uri . ' status -vvv')->run();
 
+    // Install demo_umami
     $this->taskExec($drush . $alias . $install_root . $install_uri .
-      $install_user . $install_db . $install_profile . ' site:install -vvv -y')->run();
+      $install_user . $install_db . ' site:install  ' . $install_profile . '-v -y')->run();
 
-    // Set site mode
-    $this->siteSetMode("dev");
+    // Enable modules
+    $this->taskExec($drush . 'en redirect404_home devel stage_file_proxy environment_indicator admin_toolbar -y')->run();
+
+    // Disable caches
+    $this->configDisableCaches();
   }
 
   /**

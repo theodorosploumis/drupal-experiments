@@ -3,7 +3,19 @@ name: Testing
 env:
   MODE: "dev"
 jobs:
-  debug:
+  # debug-libapache2:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Debug libapache2
+  #       run: |
+  #         sudo apt-add-repository ppa:ondrej/php -y
+  #         sudo apt-get update
+  #         sudo apt-get -y install libapache2-mod-php8.1
+  #         sudo service apache2 start
+  #         sleep 10
+  #         curl -I localhost
+  cypress-tests:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -11,22 +23,26 @@ jobs:
         run: ./docs/scripts/prepare-ci.sh
       - name: Install Drupal
         run: |
-          sudo service mysql start
+          sudo systemctl start mysql.service
           sleep 10
           sudo service apache2 start
           sleep 10
           vendor/bin/robo ci:install-drupal
       - name: Run Cypress tests
-        run: vendor/bin/robo job:tests-cypress
-
-#  code-standards:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Prepare
-#        run: ./docs/scripts/prepare-ci.sh
-#      - name: Check coding standards
-#        run: vendor/bin/robo job:coding-standards
+        run: |
+          sudo systemctl start mysql.service
+          sleep 10
+          sudo service apache2 start
+          sleep 10
+          vendor/bin/robo job:tests-cypress
+  code-standards:
+   runs-on: ubuntu-20.04
+   steps:
+     - uses: actions/checkout@v2
+     - name: Prepare
+       run: ./docs/scripts/prepare-ci.sh
+     - name: Check coding standards
+       run: vendor/bin/robo job:coding-standards
 #
 #  code-coverage:
 #    runs-on: ubuntu-20.04
@@ -67,18 +83,3 @@ jobs:
 #      - name: Run PHPUnit tests
 #        run: vendor/bin/robo job:tests-unit
 #
-#  cypress-tests:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Prepare
-#        run: ./docs/scripts/prepare-ci.sh
-#      - name: Install Drupal
-#        run: |
-#          sudo systemctl start mysql.service
-#          sleep 10
-#          sudo service apache2 start
-#          sleep 10
-#          vendor/bin/robo ci:install-drupal
-#      - name: Run Cypress tests
-#        run: vendor/bin/robo job:tests-cypress
