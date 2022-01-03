@@ -4,13 +4,13 @@ image: tplcom/gitpod-drupal-workspace:latest
 # ddev and composer are running as part of prebuild task.
 # When starting a workspace all docker images are ready.
 tasks:
-  - name: ssh-generate
-    before:
-      mkdir -p ~/.ssh &&
-      printenv SSH_PUBLIC_KEY > ~/.ssh/id_rsa.pub &&
-      chmod 644 ~/.ssh/id_rsa.pub &&
-      printenv SSH_PRIVATE_KEY > ~/.ssh/id_rsa &&
-      chmod 600 ~/.ssh/id_rsa
+  # - name: ssh-generate
+  #   before:
+  #     mkdir -p ~/.ssh &&
+  #     printenv SSH_PUBLIC_KEY > ~/.ssh/id_rsa.pub &&
+  #     chmod 644 ~/.ssh/id_rsa.pub &&
+  #     printenv SSH_PRIVATE_KEY > ~/.ssh/id_rsa &&
+  #     chmod 600 ~/.ssh/id_rsa
   - name: ddev
     before:
       source ~/.phpbrew/bashrc && phpbrew use php-8 && bash .ddev/gitpod-setup-ddev.sh
