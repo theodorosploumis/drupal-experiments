@@ -16,7 +16,8 @@ tasks:
       source ~/.phpbrew/bashrc && phpbrew use php-8 && bash .ddev/gitpod-setup-ddev.sh
     init:
       export DDEV_NONINTERACTIVE=true
-      ddev composer install
+      ddev start
+      ddev robo site:install
     command:
       gp await-port 8080 && gp preview $(gp url 8080)
 
