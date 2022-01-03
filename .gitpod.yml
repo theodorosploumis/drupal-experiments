@@ -16,8 +16,7 @@ tasks:
       source ~/.phpbrew/bashrc && phpbrew use php-8 && bash .ddev/gitpod-setup-ddev.sh
     init:
       export DDEV_NONINTERACTIVE=true
-      ddev start
-      ddev robo site:install
+      ddev start && ddev robo site:install
     command:
       gp await-port 8080 && gp preview $(gp url 8080)
 
@@ -30,7 +29,7 @@ vscode:
 
 ports:
   - port: 8080
-    onOpen: ignore
+    onOpen: open-browser
     visibility: public
   # Currently un-notified and unsupported mailhog http port
   - port: 8025
