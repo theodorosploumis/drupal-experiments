@@ -25,6 +25,8 @@ CONFIGEND
 # So add it via docker-compose.host-docker-internal.yaml
 hostip=$(awk "\$2 == \"$HOSTNAME\" { print \$1; }" /etc/hosts)
 
+rm -f "${MYDIR}"/docker-compose.host-docker-internal.yaml
+
 cat <<COMPOSEEND >"${MYDIR}"/docker-compose.host-docker-internal.yaml
 #ddev-gitpod-generated
 version: "3.6"
@@ -41,4 +43,4 @@ COMPOSEEND
 
 # Misc housekeeping before start
 ddev config global --router-bind-all-interfaces
-ddev debug download-images
+yes | ddev start
