@@ -33,9 +33,6 @@
 !.vscode/extensions.json
 .history/
 
-# Gitpod auto-generated files
-.ddev/docker-compose.host-docker-internal.yaml
-
 # backup files
 *.sql*
 *.mysql*

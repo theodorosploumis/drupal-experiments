@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Description: Run a Cypress command
+##   https://docs.cypress.io/guides/guides/command-line
+## Usage: cypress [command] [arguments]
+## Example: "ddev cypress open --config cypress.json"
+
+cypress "$@"
