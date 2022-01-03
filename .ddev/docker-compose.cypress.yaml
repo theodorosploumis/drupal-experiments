@@ -8,9 +8,9 @@ services:
       com.ddev.approot: $DDEV_APPROOT
     user: '$DDEV_UID:$DDEV_GID'
     tty: true
-    ipc: host
+    # ipc: host
     links:
-      - web:web
+      - web:cypress
 
     environment:
       - CYPRESS_baseUrl=$DDEV_PRIMARY_URL
