@@ -13,11 +13,9 @@ tasks:
   #     chmod 600 ~/.ssh/id_rsa
   - name: ddev
     before:
-      source ~/.phpbrew/bashrc && phpbrew use php-8 && ddev debug download-images
-    init:
-      bash .ddev/gitpod-setup-ddev.sh
+      source ~/.phpbrew/bashrc && phpbrew use php-8 && bash .ddev/gitpod-prebuild-before.sh
     command:
-      bash .ddev/gitpod-setup-ddev.sh && ddev robo site:install
+      bash .ddev/gitpod-start-ddev.sh && ddev robo site:install
 
 # VScode xdebug extension
 vscode:

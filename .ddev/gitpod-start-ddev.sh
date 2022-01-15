@@ -43,4 +43,3 @@ COMPOSEEND
 
 # Misc housekeeping before start
 ddev config global --router-bind-all-interfaces
-yes | ddev start
