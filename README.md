@@ -30,8 +30,8 @@ We automate this process with the command `composer release:patch`
 ## Installation
 
 ```shell
-git clone git@github.com:theodorosploumis/drupal-actions.git
-cd drupal-actions
+git clone git@github.com:theodorosploumis/drupal-experiments.git
+cd drupal-experiments
 
 # Requires: composer 2.x, PHP 8.0
 composer install
@@ -50,8 +50,8 @@ vim .env
 DDEV equivalent installation example:
 
 ```shell
-git clone git@github.com:theodorosploumis/drupal-actions.git
-cd drupal-actions
+git clone git@github.com:theodorosploumis/drupal-experiments.git
+cd drupal-experiments
 ddev start
 ddev auth ssh
 ddev robo site:install
