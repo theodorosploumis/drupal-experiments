@@ -23,6 +23,8 @@ sudo ufw allow in "Apache"
 sudo ufw enable
 
 # Debug
+# dpkg --get-selections | grep -i php
+# php -m
 # sudo cat /etc/apache2/apache2.conf
 # sudo cat /etc/apache2/sites-available/000-default.conf
 # sudo cat /etc/apache2/mods-available/dir.conf
