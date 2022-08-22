@@ -14,6 +14,9 @@
 /web/sites/*/files/
 /private-files/**
 
+# Ignore config
+/config/sync
+
 # Ignore SimpleTest multi-site environment.
 /web/sites/simpletest
 
