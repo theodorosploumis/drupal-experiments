@@ -20,13 +20,13 @@
         "consolidation/robo": "^3.0",
         "cweagans/composer-patches": "^1.7",
         "defuse/php-encryption": "^2.3",
-        "drupal/admin_toolbar": "^3.0",
+        "drupal/admin_toolbar": "^3.4",
         "drupal/backup_migrate": "^5.0",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-recommended": "^9.3",
-        "drupal/devel": "^4.1",
+        "drupal/devel": "^4.2",
         "drupal/environment_indicator": "^4.0",
-        "drupal/redirect404_home": "^1.0",
+        "drupal/redirect404_home": "^2.0",
         "drupal/stage_file_proxy": "^1.2",
         "drush/drush": "^10.6",
         "oomphinc/composer-installers-extender": "^2.0",
@@ -91,9 +91,6 @@
             "drupal/core": {
                 "BaseFieldOverride fails to take into account ContentEntityInterface::bundleFieldDefinitions()... https://dgo.to/2321071": "https://www.drupal.org/files/issues/2019-12-24/2321071-39.patch",
                 "Allow an install hook in profiles installing from configuration, https://dgo.to/2982052": "https://www.drupal.org/files/issues/2022-05-19/2982052-80.patch"
-            },
-            "drupal/devel": {
-                "Compatability with Core 9.3, https://gitlab.com/drupalspoons/devel/-/issues/388": "https://gitlab.com/drupalspoons/devel/uploads/63e4e96921f8c05d3e98faf84d62d4e4/388-compatability-with-core-9.3.diff"
             }
         },
         "drupal-scaffold": {
