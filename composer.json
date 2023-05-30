@@ -24,10 +24,10 @@
         "drupal/backup_migrate": "^5.0",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-recommended": "^9.3",
-        "drupal/devel": "^4.2",
+        "drupal/devel": "^5.0",
         "drupal/environment_indicator": "^4.0",
         "drupal/redirect404_home": "^2.0",
-        "drupal/stage_file_proxy": "^1.2",
+        "drupal/stage_file_proxy": "^2.0",
         "drush/drush": "^10.6",
         "oomphinc/composer-installers-extender": "^2.0",
         "vlucas/phpdotenv": "^5.3"

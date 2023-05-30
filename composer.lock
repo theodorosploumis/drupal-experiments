@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "460a40b0a1535f441f961e3b34c38037",
+    "content-hash": "07747aa5ee3cb05d5436f63317f76b88",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2394,28 +2394,29 @@
         },
         {
             "name": "drupal/devel",
-            "version": "4.2.1",
+            "version": "5.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel.git",
-                "reference": "4.2.1"
+                "reference": "5.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel-4.2.1.zip",
-                "reference": "4.2.1",
-                "shasum": "aa08379bad81cb2e604ee9a0b9e2aabd86fae13f"
+                "url": "https://ftp.drupal.org/files/projects/devel-5.1.1.zip",
+                "reference": "5.1.1",
+                "shasum": "d7423dfe9c2333508618975c37f3b63026adca50"
             },
             "require": {
-                "doctrine/common": "^2.7",
-                "drupal/core": "^8.8 || ^9",
-                "symfony/var-dumper": "^4 || ^5"
+                "doctrine/common": "^2.7 || ^3.4",
+                "drupal/core": "^9 || ^10",
+                "php": ">=7.4",
+                "symfony/var-dumper": "^4 || ^5 || ^6"
             },
             "conflict": {
                 "kint-php/kint": "<3"
             },
             "require-dev": {
-                "drush/drush": "^10"
+                "drush/drush": "^11"
             },
             "suggest": {
                 "kint-php/kint": "Kint provides an informative display of arrays/objects. Useful for debugging and developing."
@@ -2423,8 +2424,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.2.1",
-                    "datestamp": "1664317444",
+                    "version": "5.1.1",
+                    "datestamp": "1671644739",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2432,7 +2433,7 @@
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9 || ^10"
+                        "drush.services.yml": "^9 || ^10 || ^11"
                     }
                 }
             },
@@ -2556,26 +2557,29 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "1.5.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "8.x-1.5"
+                "reference": "2.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "a8d38b724a2d69e16a986e8cbbf0e93220c82de9"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "187019fdbb7b805a66068c6ca93d211f439d288b"
             },
             "require": {
-                "drupal/core": "^9"
+                "drupal/core": "^9 || ^10"
+            },
+            "require-dev": {
+                "drush/drush": "^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1669762106",
+                    "version": "2.0.2",
+                    "datestamp": "1670369228",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2583,7 +2587,7 @@
                 },
                 "drush": {
                     "services": {
-                        "stage_file_proxy.drush.services.yml": "^9 || ^10"
+                        "stage_file_proxy.drush.services.yml": "^11"
                     }
                 }
             },
