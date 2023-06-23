@@ -4,6 +4,10 @@
 
 A simple Unami website to demonstrate Drupal 9.x CI with GitHub actions, ddev, git-hooks, gitpod etc.
 
+## See also
+
+- https://github.com/theodorosploumis/drupal-example-10x
+
 ## Development
 
 - For most of the tasks bellow there is a Robo command available. Run `./vendor/bin/robo` to get the list of available commands.
